@@ -66,3 +66,33 @@ Este projeto é uma API desenvolvida com FastAPI para gerenciar alunos, cursos e
 - Para reiniciar o banco, basta apagar o arquivo `escola.db` (isso apagará todos os dados).
 
 ---
+
+## Deploy no Google Cloud Run
+
+7. **Deploy no Google Cloud Run:**
+
+```sh
+   gcloud auth login
+   gcloud config set project imersao-devops
+   gcloud run deploy --port=8000
+```
+
+8. **Verificar billing-account:**
+
+```sh
+   gcloud beta billing projects describe imersao-devops
+   gcloud beta billing projects link imersao-devops \
+      --billing-account=xxxxxx-xxxxxx-xxxxxx
+   gcloud beta billing accounts list
+```
+
+9. **Remover recursos criados:**
+
+```sh
+   gcloud run services list
+   gcloud run services delete imersao-devops --region=us-east1 --quiet
+
+   gclouid artifacts repositories list
+   gcloud artifacts repositories delete imersao-devops --location=us-east1 --quiet 
+
+---
